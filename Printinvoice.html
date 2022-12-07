@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-info text-center" onload="getTaxResult()">
+
+    <script type="text/javascript">
+        function getTaxResult()
+        {
+
+            var yearlytax;
+            var monthlytax;
+            var yearlynetpay;
+            var effectivetaxrate;
+            var monthlynetpay;
+
+
+
+            document.getElementById("taxsummaryheader").innerHTML = "Here is your Tax Summary " + sessionStorage.getItem("fullname");
+
+            // get yearly results
+
+            document.getElementById("tgrossyearly").innerHTML = sessionStorage.getItem("grossincomeyearly");
+            document.getElementById("tfederalyearly").innerHTML = sessionStorage.getItem("federaltaxyearly");
+            document.getElementById("tstateyearly").innerHTML = sessionStorage.getItem("statetaxyearly");
+            document.getElementById("tpayeyearly").innerHTML = sessionStorage.getItem("payeyearly");
+            document.getElementById("tpensionyearly").innerHTML = sessionStorage.getItem("pensionyearly");
+            document.getElementById("tnhfyearly").innerHTML = sessionStorage.getItem("nhfyearly");
+
+            yearlytax = Number(sessionStorage.getItem("federaltaxyearly")) + Number(sessionStorage.getItem("statetaxyearly")) + Number(sessionStorage.getItem("payeyearly")) + Number(sessionStorage.getItem("pensionyearly")) + Number(sessionStorage.getItem("nhfyearly"));
+            document.getElementById("syearlytax").innerHTML = yearlytax;
+
+            document.getElementById("syearlyincome").innerHTML = Number(sessionStorage.getItem("grossincomeyearly"));
+
+            yearlynetpay = Number(sessionStorage.getItem("grossincomeyearly")) - yearlytax;
+
+            document.getElementById("syearlynetpay").innerHTML = yearlynetpay;
+            document.getElementById("tnetpayyearly").innerHTML = yearlynetpay;
+
+            document.getElementById("seffectivetax").innerHTML = Number(sessionStorage.getItem("effectivetaxrate"))
+
+
+            // get monthly results
+
+            document.getElementById("tgrossmonthly").innerHTML = sessionStorage.getItem("grossincomemonthly");
+            document.getElementById("tfederalmonthly").innerHTML = sessionStorage.getItem("federaltaxmonthly");
+            document.getElementById("tstatemonthly").innerHTML = sessionStorage.getItem("statetaxmonthly");
+            document.getElementById("tpayemonthly").innerHTML = sessionStorage.getItem("payemonthly");
+            document.getElementById("tpensionmonthly").innerHTML = sessionStorage.getItem("pensionmonthly");
+            document.getElementById("tnhfmonthly").innerHTML = sessionStorage.getItem("nhfmonthly");
+
+            monthlytax = Number(sessionStorage.getItem("federaltaxmonthly")) + Number(sessionStorage.getItem("statetaxmonthly")) + Number(sessionStorage.getItem("payemonthly")) + Number(sessionStorage.getItem("pensionmonthly")) + Number(sessionStorage.getItem("nhfmonthly"));
+
+            document.getElementById("tnetpaymonthly").innerHTML = monthlytax;
+        }
+    </script>
+    <header class="p-2">
+        <h3 id="taxsummaryheader"></h3>
+        <h6 id="hfullname"></h6>
+    </header>
+    <section class="p-2 bg-light">
+        <div class="row">
+            <div class="col-md-3">
+                <b id="syearlyincome"></b>
+                <p>Yearly Income</p>
+            </div>
+            <div class="col-md-3">
+                <b id="syearlytax"></b>
+                <p>Yearly Taxes</p>
+            </div>
+            <div class="col-md-3">
+                <b id="syearlynetpay"></b>
+                <p>Yearly Net Pay</p>
+            </div>
+            <div class="col-md-3">
+                <b id="seffectivetax"></b>
+                <p>Effective Tax Rate</p>
+            </div>
+        </div>
+    </section>
+    <section class="p-2">
+        <table class="table-sm table table-stripped bg-info bg-light">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Yearly</td>
+                    <td>Monthly</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="font-weight-bold">Gross Income</td>
+                    <td id="tgrossyearly"></td>
+                    <td id="tgrossmonthly"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Federal Tax</td>
+                    <td id="tfederalyearly"></td>
+                    <td id="tfederalmonthly"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">State Tax</td>
+                    <td id="tstateyearly"></td>
+                    <td id="tstatemonthly"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">PAYE</td>
+                    <td id="tpayeyearly"></td>
+                    <td id="tpayemonthly"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Pension EE</td>
+                    <td id="tpensionyearly"></td>
+                    <td id="tpensionmonthly"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">NHF</td>
+                    <td id="tnhfyearly"></td>
+                    <td id="tnhfmonthly"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Net Pay</td>
+                    <td id="tnetpayyearly"></td>
+                    <td id="tnetpaymonthly"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+    <script type="text/javascript">
+        window.addEventListener("load", window.print());
+    </script>
+</body>
+</html>
