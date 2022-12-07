@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-info text-center" onload="getTaxResult()" >
+
+    <script type="text/javascript">
+        function getTaxResult()
+        {
+            // get yearly results
+
+            document.getElementById("tgrossyearly").innerHTML = sessionStorage.getItem("grossincomeyearly");
+            document.getElementById("tfederalyearly").innerHTML = sessionStorage.getItem("federaltaxyearly");
+            document.getElementById("tstateyearly").innerHTML = sessionStorage.getItem("statetaxyearly");
+            document.getElementById("tpayeyearly").innerHTML = sessionStorage.getItem("payeyearly");
+            document.getElementById("tpensionyearly").innerHTML = sessionStorage.getItem("pensionyearly");
+            document.getElementById("tnhfyearly").innerHTML = sessionStorage.getItem("nhfyearly");
+                        
+        }
+    </script>
+    <header class="p-2">
+        <h3>TAX SUMMARY</h3>
+        <h6 id="hfullname"></h6>
+    </header>
+    <section class="p-2 bg-light">
+        <div class="row">
+            <div class="col-md-3">
+                <b></b>
+                <p>Yearly Income</p>
+            </div>
+            <div class="col-md-3">
+                <b></b>
+                <p>Yearly Taxes</p>
+            </div>
+            <div class="col-md-3">
+                <b></b>
+                <p>Yearly Net Pay</p>
+            </div>
+            <div class="col-md-3">
+                <b></b>
+                <p>Effective Tax Rate</p>
+            </div>
+        </div>
+    </section>
+    <section class="p-2">
+        <table class="table-sm table table-stripped bg-info bg-light">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Yearly</td>
+                    <td>Monthly</td>
+                    <td>Weekly</td>
+                    <td>Daily</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="font-weight-bold">Gross Income</td>
+                    <td id="tgrossyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Federal Tax</td>
+                    <td id="tfederalyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">State Tax</td>
+                    <td id="tstateyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">PAYE</td>
+                    <td id="tpayeyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Pension EE</td>
+                    <td id="tpensionyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">NHF</td>
+                    <td id="tnhfyearly"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Net Pay</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="width:50%;margin:auto">
+            <input id="Button1" type="button" class="btn btn-lg btn-dark" value="Print Invoice" />
+        </div>
+    </section>
+</body>
+</html>

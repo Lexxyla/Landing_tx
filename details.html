@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-info text-center">
+    <script type="text/javascript">
+
+
+        var federaltax;
+        var statetax;
+        var paye;
+        var pension;
+        var nhf;
+
+        var fullname;
+        var grossincomeyearly;
+        var grossincomemonthly;
+        var grossincomeweekly;
+        var grossincomedaily;
+
+        function getDeductions() {
+
+
+            if (cbotype.value == "Individual") {
+                federaltax = 0;
+                statetax = 0.18;
+                paye = 0.07;
+                pension = 0.18;
+                nhf = 0.025;
+
+                document.getElementById("txtfederaltax").value = federaltax;
+                document.getElementById("txtstatetax").value = statetax;
+                document.getElementById("txtpaye").value = paye;
+                document.getElementById("txtpension").value = pension;
+                document.getElementById("txtnhf").value = nhf;
+
+
+            }
+            else if (cbotype.value == "Company") {
+                federaltax = 0.3;
+                statetax = 0;
+                paye = 0;
+                pension = 0;
+                nhf = 0;
+
+                document.getElementById("txtfederaltax").value = federaltax;
+                document.getElementById("txtstatetax").value = statetax;
+                document.getElementById("txtpaye").value = paye;
+                document.getElementById("txtpension").value = pension;
+                document.getElementById("txtnhf").value = nhf;
+            }
+        }
+        function calculateTax() {
+            fullname = document.getElementById("txtfullname").value;
+            grossincomeyearly = document.getElementById("txtgrossincome").value;
+
+            // store values in sessionstate
+
+            if (cbotype.value == "Individual")
+            {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomeyearly", grossincomeyearly);
+                sessionStorage.setItem("federaltaxyearly", federaltax * grossincomeyearly);
+                sessionStorage.setItem("statetaxyearly".statetax * grossincomeyearly);
+                sessionStorage.setItem("payeyearly", paye * grossincomeyearly);
+                sessionStorage.setItem("pensionyearly", pension * grossincomeyearly);
+                sessionStorage.setItem("nhfyearly", nhf * grossincomeyearly);
+                location.href = "summary.html";
+            }
+            else if (cbotype.value == "Company")
+            {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomeyearly", grossincomeyearly);
+                sessionStorage.setItem("federaltaxyearly", federaltax * grossincomeyearly);
+                sessionStorage.setItem("statetaxyearly".statetax * grossincomeyearly);
+                sessionStorage.setItem("payeyearly", paye * grossincomeyearly);
+                sessionStorage.setItem("pensionyearly", pension * grossincomeyearly);
+                sessionStorage.setItem("nhfyearly", nhf * grossincomeyearly);
+                location.href="summary.html";
+            }
+        }
+    </script>
+    <header class="p-2">
+        <h3>Please, enter your Details</h3>
+    </header>
+    <section style="width:70%; margin:auto">
+        <div class="row">
+            <div class="col-md-3">
+                <b>Your Full Name</b>
+            </div>
+            <div class="col-md-8">
+                <input id="txtfullname" class="form-control" type="text" />
+            </div>
+        </div>
+    </section>
+    <section style="width:70%; margin:auto">
+        <div class="row">
+            <div class="col-md-3">
+                <b>Select Tax Type</b>
+            </div>
+            <div class="col-md-8">
+                <select id="cbotype" class="form-control" onchange="getDeductions()">
+                    <option label=" Select Tax Type"></option>
+                    <option value="Individual" label="Individual"></option>
+                    <option value="Company" label="Company"></option>
+                </select>
+            </div>
+        </div>
+    </section>
+    <header class="p-2">
+        <h3>Compulsory Deductions</h3>
+    </header>
+    <section style="width:70%;margin:auto">
+        <div class="row">
+            <div class="col-md-3"><b>Federal Tax%</b></div>
+            <div class="col-md-8">
+                <input id="txtfederaltax" class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><b>State Tax</b></div>
+            <div class="col-md-8">
+                <input id="txtstatetax" class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><b>PAYE</b></div>
+            <div class="col-md-8">
+                <input id="txtpaye" class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><b>Pension EE</b></div>
+            <div class="col-md-8">
+                <input id="txtpension" class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><b>NHF</b></div>
+            <div class="col-md-8">
+                <input id="txtnhf" class="form-control" type="text" />
+            </div>
+        </div>
+    </section>
+    <header class="p-2">
+        <h3> Gross Income</h3>
+    </header> 
+    <section style="width:70%;margin:auto">
+        <div class="row">
+            <div class="col-md-3"><b>Annual Gross</b></div>
+            <div class="col-md-8">
+                <input id="Text1" class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="p-3">
+            <input id="btncalculatetax" type="button" onclick="calculateTax()" class="btn btn-lg btn-dark" value="Calculate Tax" />
+        </div>
+    </section>
+</body>
+</html>
