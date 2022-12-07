@@ -18,6 +18,7 @@
         var nhf;
 
         var fullname;
+        var taxtype;
         var grossincomeyearly;
         var grossincomemonthly;
         var grossincomeweekly;
@@ -32,6 +33,7 @@
                 paye = 0.07;
                 pension = 0.18;
                 nhf = 0.025;
+                effectivetaxrate = federaltax + statetax + paye + pension + nhf;
 
                 document.getElementById("txtfederaltax").value = federaltax;
                 document.getElementById("txtstatetax").value = statetax;
@@ -47,6 +49,7 @@
                 paye = 0;
                 pension = 0;
                 nhf = 0;
+                effectivetaxrate = federaltax + statetax + paye + pension + nhf;
 
                 document.getElementById("txtfederaltax").value = federaltax;
                 document.getElementById("txtstatetax").value = statetax;
@@ -57,31 +60,106 @@
         }
         function calculateTax() {
             fullname = document.getElementById("txtfullname").value;
+            taxtype = document.getElementById("cbotype").value
             grossincomeyearly = document.getElementById("txtgrossincome").value;
+            grossincomemonthly = document.getElementById("txtgrossincome").value / 12;
 
-            // store values in sessionstate
 
-            if (cbotype.value == "Individual")
-            {
+            sessionStorage.getItem("fullname", fullname); 
+            sessionStorage.getItem("taxtype", taxtype)
+
+            // store values in sessionstate for yearly taxes
+
+            if (cbotype.value == "Individual") {
                 sessionStorage.setItem("fullname", fullname);
                 sessionStorage.setItem("grossincomeyearly", grossincomeyearly);
                 sessionStorage.setItem("federaltaxyearly", federaltax * grossincomeyearly);
-                sessionStorage.setItem("statetaxyearly".statetax * grossincomeyearly);
+                sessionStorage.setItem("statetaxyearly", statetax * grossincomeyearly);
                 sessionStorage.setItem("payeyearly", paye * grossincomeyearly);
                 sessionStorage.setItem("pensionyearly", pension * grossincomeyearly);
                 sessionStorage.setItem("nhfyearly", nhf * grossincomeyearly);
-                location.href = "summary.html";
+                sessionStorage.setItem("effectivetaxrate", effectivetaxrate);
+                window.location.href = "summary.html";
             }
-            else if (cbotype.value == "Company")
-            {
+            else if (cbotype.value == "Company") {
                 sessionStorage.setItem("fullname", fullname);
                 sessionStorage.setItem("grossincomeyearly", grossincomeyearly);
                 sessionStorage.setItem("federaltaxyearly", federaltax * grossincomeyearly);
-                sessionStorage.setItem("statetaxyearly".statetax * grossincomeyearly);
+                sessionStorage.setItem("statetaxyearly", statetax * grossincomeyearly);
                 sessionStorage.setItem("payeyearly", paye * grossincomeyearly);
                 sessionStorage.setItem("pensionyearly", pension * grossincomeyearly);
                 sessionStorage.setItem("nhfyearly", nhf * grossincomeyearly);
-                location.href="summary.html";
+                sessionStorage.setItem("effectivetaxrate", effectivetaxrate);
+                window.location.href = "summary.html";
+            }
+
+            // store values in sessionstate for monthly taxes
+
+            if (cbotype.value == "Individual") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomemonthly", grossincomemonthly);
+                sessionStorage.setItem("federaltaxmonthly", federaltax * grossincomemonthly);
+                sessionStorage.setItem("statetaxmonthly", statetax * grossincomemonthly);
+                sessionStorage.setItem("payemonthly", paye * grossincomemonthly);
+                sessionStorage.setItem("pensionmonthly", pension * grossincomemonthly);
+                sessionStorage.setItem("nhfmonthly", nhf * grossincomemonthly);
+                window.location.href = "summary.html";
+            }
+            else if (cbotype.value == "Company") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomemonthly", grossincomemonthly);
+                sessionStorage.setItem("federaltaxmonthly", federaltax * grossincomemonthly);
+                sessionStorage.setItem("statetaxmontly", statetax * grossincomemonthly);
+                sessionStorage.setItem("payemonthly", paye * grossincomemonthly);
+                sessionStorage.setItem("pensionmonthly", pension * grossincomemonthly);
+                sessionStorage.setItem("nhfmonthly", nhf * grossincomemonthly);
+                window.location.href = "summary.html";
+            }
+
+            // store values in sessionstate for weekly taxes
+
+            if (cbotype.value == "Individual") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomeweekly", grossincomeweekly);
+                sessionStorage.setItem("federaltaxweekly", federaltax * grossincomeweekly);
+                sessionStorage.setItem("statetaxweekly", statetax * grossincomeweekly);
+                sessionStorage.setItem("payeweekly", paye * grossincomeweekly);
+                sessionStorage.setItem("pensionweekly", pension * grossincomeweekly);
+                sessionStorage.setItem("nhfweekly", nhf * grossincomeweekly);
+                window.location.href = "summary.html";
+            }
+            else if (cbotype.value == "Company") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomeweekly", grossincomeweekly);
+                sessionStorage.setItem("federaltaxweekly", federaltax * grossincomeweekly);
+                sessionStorage.setItem("statetaxweekly", statetax * grossincomeweekly);
+                sessionStorage.setItem("payeweekly", paye * grossincomeweekly);
+                sessionStorage.setItem("pensionweekly", pension * grossincomeweekly);
+                sessionStorage.setItem("nhfweekly", nhf * grossincomeweekly);
+                window.location.href = "summary.html";
+            }
+
+            // store values in sessionstate for daily taxes
+
+            if (cbotype.value == "Individual") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomedaily", grossincomedaily);
+                sessionStorage.setItem("federaltaxdaily", federaltax * grossincomedaily);
+                sessionStorage.setItem("statetaxdaily", statetax * grossincomedaily);
+                sessionStorage.setItem("payedaily", paye * grossincomedaily);
+                sessionStorage.setItem("pensiondaily", pension * grossincomedaily);
+                sessionStorage.setItem("nhfdaily", nhf * grossincomedaily);
+                window.location.href = "summary.html";
+            }
+            else if (cbotype.value == "Company") {
+                sessionStorage.setItem("fullname", fullname);
+                sessionStorage.setItem("grossincomedaily", grossincomedaily);
+                sessionStorage.setItem("federaltaxdaily", federaltax * grossincomedaily);
+                sessionStorage.setItem("statetaxdaily", statetax * grossincomedaily);
+                sessionStorage.setItem("payedaily", paye * grossincomedaily);
+                sessionStorage.setItem("pensiondaily", pension * grossincomedaily);
+                sessionStorage.setItem("nhfdaily", nhf * grossincomedaily);
+                window.location.href = "summary.html";
             }
         }
     </script>
@@ -117,7 +195,7 @@
     </header>
     <section style="width:70%;margin:auto">
         <div class="row">
-            <div class="col-md-3"><b>Federal Tax%</b></div>
+            <div class="col-md-3"><b>Federal Tax</b></div>
             <div class="col-md-8">
                 <input id="txtfederaltax" class="form-control" type="text" />
             </div>
@@ -149,12 +227,12 @@
     </section>
     <header class="p-2">
         <h3> Gross Income</h3>
-    </header> 
+    </header>
     <section style="width:70%;margin:auto">
         <div class="row">
             <div class="col-md-3"><b>Annual Gross</b></div>
             <div class="col-md-8">
-                <input id="Text1" class="form-control" type="text" />
+                <input id="txtgrossincome" class="form-control" type="text" />
             </div>
         </div>
         <div class="p-3">
